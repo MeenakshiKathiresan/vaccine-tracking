@@ -1,10 +1,19 @@
-import React, { useState } from "react";
+import React from "react";
+import PatientRecord from "../components/patientRecord.component";
+import Add from "../components/add.component";
 
-const UserCard = ({ name, age, gender, imageUrl }) => {
+const PatientDetails = () => {
+
+    const name = "Meenakshi";
+    const age=21;
+    const gender="Female";
+    const imageUrl="https://lh3.googleusercontent.com/ogw/AOLn63FiWYtTp4YAbuzwJKxQkDC2szP_2ZpGCHV8p9TMVA=s32-c-mo";
+    
     return (
-
-
-        <div className="card">
+        <div className="parent-div">
+            <br />
+            <div>
+            <div className="card w-100">
             <div className="d-flex flex-row card-heading">
                 <img src={imageUrl} className="shadow-1-strong me-3 mt-1 card-img" alt="Card" />
                 <div>
@@ -29,13 +38,16 @@ const UserCard = ({ name, age, gender, imageUrl }) => {
                     <p>Blood group: 123 Street</p>
                     <p>Start date: 25th April, 2022</p>
                     <p>Contact: 123-456-7890</p>
+                    <p>Allergies: Penicillin, Peanuts, Dust mites, Pollen, Latex, Shellfish, Food additives</p>
+                    <p>History: - </p>
                 </div>
             </div>
         </div>
 
+            </div>
+            <PatientRecord />
+            <Add/>
+        </div>)
+}
 
-
-    );
-};
-
-export default UserCard;
+export default PatientDetails;

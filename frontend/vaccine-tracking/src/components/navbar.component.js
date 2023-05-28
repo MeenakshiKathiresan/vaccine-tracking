@@ -1,11 +1,13 @@
 import React, {useState} from 'react';
-import "../App.css"
+import "../App.css";
+import { Link } from 'react-router-dom';
 
 const NavBar = () => {
 
     const [activeTab, setActiveTab] = useState('home')
 
     const handleOnClick = (tab)=>{
+        console.log(tab)
         setActiveTab(tab)
     }
 
@@ -24,10 +26,14 @@ const NavBar = () => {
                     <div className="collapse navbar-collapse" id="navbarTogglerDemo02">
                         <ul className="navbar-nav mr-auto mt-2 mt-lg-0">
                             <li className= "nav-item">
-                                <a className={`nav-link ${activeTab === 'vaccines' ? 'active' : ''}`} href="#" onClick = {() => handleOnClick('vaccines')}>Vaccines </a>
+                                <Link className={`nav-link ${activeTab === 'vaccines' ? 'active' : ''}`} to="/vaccines" onClick = {() => handleOnClick('vaccines')}>Vaccines </Link>
                             </li>
                             <li className= "nav-item">
-                                <a className={`nav-link ${activeTab === 'people' ? 'active' : ''}`} href="#" onClick = {() => handleOnClick('people')}>People</a>
+                                <Link className={`nav-link ${activeTab === 'people' ? 'active' : ''}`} to="/people" onClick = {() => handleOnClick('people')}>People</Link>
+                            </li>
+
+                            <li className= "nav-item">
+                                <Link className={`nav-link ${activeTab === 'mindset' ? 'active' : ''}`} to="/" onClick = {() => handleOnClick('mindset')}>Mindset</Link>
                             </li>
                         </ul>
                     </div>
