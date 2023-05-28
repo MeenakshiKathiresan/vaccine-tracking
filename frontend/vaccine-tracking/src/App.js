@@ -4,8 +4,9 @@ import 'bootstrap/dist/css/bootstrap.css';
 
 import React, { useState } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import UserPage from './pages/users.component';
+import People from './pages/people.component';
 import NavBar from './components/navbar.component';
+import Vaccines from './pages/vaccines.component';
 
 
 function App() {
@@ -15,7 +16,8 @@ function App() {
       <Router>
         <NavBar />
         <Routes> 
-          <Route path="/" element={<UserPage />} />
+          <Route path="/" element={<People />} />
+          <Route path="/vaccine" element={<Vaccines />} />
         </Routes>
       </Router>
 
