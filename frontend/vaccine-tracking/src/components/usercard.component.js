@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import { convertDate } from "../utility";
 
 const UserCard = ({ patientData}) => {
     return (
@@ -25,7 +26,7 @@ const UserCard = ({ patientData}) => {
 
                 <div>
                     <p>Blood group: {patientData.bloodGroup}</p>
-                    <p>Start date: {patientData.createdAt}</p>
+                    <p>Start date: { convertDate(patientData.createdAt)}</p>
                     <p>Contact: {patientData.contact}</p>
                     <p>Email: {patientData.email}</p>
                 </div>

@@ -6,8 +6,8 @@ import { getAllPatients } from '../API services/patientServices';
 
 const People = () => {
 
- 
-    
+
+
 
     const [activeTab, setActiveTab] = useState('doctors')
     const [patientsData, setPatientsData] = useState([]);
@@ -20,9 +20,9 @@ const People = () => {
 
     useEffect(() => {
         getAllPatients(setPatientsData);
-      }, []);
+    }, []);
 
-  const numbers = [1, 2, 3, 4, 5];
+    const numbers = [1, 2, 3, 4, 5];
 
     return (
 
@@ -31,23 +31,24 @@ const People = () => {
 
             <ul className="nav nav-fill tabs">
                 <li className="nav-item tab left-rounded">
-                    <a className={`nav-link ${activeTab === 'doctors' ? 'active-tab' : ''}`} aria-current="page" href="#" onClick={() => { handleTabClick('doctors') }}>Doctors</a>
+                    <a className={`nav-link  tab left-rounded ${activeTab === 'patients' ? 'active-tab' : ''}`} href="#" onClick={() => { handleTabClick('patients') }}>Patients</a>
                 </li>
                 <li className="nav-item tab right-rounded">
-                    <a className={`nav-link ${activeTab === 'patients' ? 'active-tab' : ''}`} href="#" onClick={() => { handleTabClick('patients') }}>Patients</a>
+                    <a className={`nav-link tab right-rounded ${activeTab === 'doctors' ? 'active-tab' : ''}`} aria-current="page" href="#" onClick={() => { handleTabClick('doctors') }}>Doctors</a>
                 </li>
+
             </ul>
 
-            <br/>
+            <br />
             <div className="row">
 
-            {patientsData.map((patientData) => (
-                <div className="col-sm-3">
-                    <UserCard patientData = {patientData}/>
-                </div>
-            ))}
+                {patientsData.map((patientData) => (
+                    <div className="col-sm-3">
+                        <UserCard patientData={patientData} />
+                    </div>
+                ))}
             </div>
-            <Add navigateTo = "/create/patient"/>
+            <Add navigateTo="/create/patient" />
         </div>
     );
 };

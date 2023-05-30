@@ -1,7 +1,11 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import "../App.css";
+import { addPatientRecord } from '../API services/patientServices';
 
 const CreatePatientRecord = () => {
+
+    
+
     const [formData, setFormData] = useState({
         status: '',
         vitals: {
@@ -29,7 +33,25 @@ const CreatePatientRecord = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
+
+        const link = window.location.href;
+        const patientId = link.slice(link.lastIndexOf("/") + 1);
+        
         console.log(formData); // You can perform further actions with the form data
+
+        addPatientRecord(patientId, formData, () => {
+            setFormData({
+                status: '',
+                vitals: {
+                    bloodPressure: '',
+                    heartRate: '',
+                    temperature: '',
+                    respiratoryRate: ''
+                },
+                medication: '',
+                observation: ''
+            })
+        })
     };
 
     return (
@@ -49,8 +71,8 @@ const CreatePatientRecord = () => {
                             required
                         >
                             <option value="">Select Status</option>
-                            <option value="stable">Stable</option>
-                            <option value="unstable">Unstable</option>
+                            <option value="Stable">Stable</option>
+                            <option value="Unstable">Unstable</option>
                         </select>
                     </div>
                 </div>
@@ -138,7 +160,7 @@ const CreatePatientRecord = () => {
                         ></textarea>
                     </div>
                 </div>
-                <br/>
+                <br />
 
                 <div className="row">
                     <div className="col-md-12 d-flex justify-content-center">

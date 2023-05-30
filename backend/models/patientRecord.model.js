@@ -9,6 +9,11 @@ const PatientRecordSchema = new Schema(
     recordNumber: {
       type: String,
     },
+    status: {
+        type: String,
+        enum: ["Stable", "Unstable"],
+        required: true,
+      },
     vitals: {
       bloodPressure: {
         type: String,

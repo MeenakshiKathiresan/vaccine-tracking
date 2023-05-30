@@ -62,6 +62,7 @@ const getAllPatients = (setData) => {
   const getPatient = (patientId, setData) => {
     const reqUrl = URLS.baseUrl + "/patient/" + patientId;
     
+    
     axios.get(reqUrl)
       .then(response => {
         setData(response.data);
@@ -70,5 +71,78 @@ const getAllPatients = (setData) => {
         console.log(error);
       });
   }
+
+
+  const getAllPatientRecords = (patientId, setData) => {
+    const reqUrl = URLS.baseUrl + "/patient/records/" + patientId;
+    
+    axios.get(reqUrl)
+      .then(response => {
+          console.log(response.data);
+        setData(response.data);
+      })
+      .catch(error => {
+        console.log(error);
+      });
+  }
+
   
-  export {getPatient, getAllPatients, addPatient, deletePatient, updatePatient}
+
+  const addPatientRecord = (patientId, recordData, callback) => {
+      console.log(patientId)
+    const reqUrl = URLS.baseUrl + "/patient/records/add/"+patientId;
+  
+    axios.post(reqUrl, recordData)
+      .then(response => {
+        if (callback) {
+          callback(response.data);
+        }
+      })
+      .catch(error => {
+        console.log(error);
+      });
+  }
+
+  const updatePatientRecord = (recordId, recordData, callback) => {
+    const reqUrl = URLS.baseUrl + "/patient/records/" + recordId + "/edit";
+    
+    axios.put(reqUrl, recordData)
+      .then(response => {
+        if (callback) {
+          callback(response.data);
+        }
+      })
+      .catch(error => {
+        console.log(error);
+      });
+  }
+  const deletePatientRecord = (recordId, callback) => {
+    const reqUrl = URLS.baseUrl + "/patient/records/" + recordId + "/delete";
+    
+    axios.delete(reqUrl)
+      .then(response => {
+        if (callback) {
+          callback(response.data);
+        }
+      })
+      .catch(error => {
+        console.log(error);
+      });
+  }
+
+
+
+  const getPatientRecord = (recordId, setData) => {
+    const reqUrl = URLS.baseUrl + "/patient/records/" + recordId;
+    
+    axios.get(reqUrl)
+      .then(response => {
+        setData(response.data);
+      })
+      .catch(error => {
+        console.log(error);
+      });
+  }
+      
+  
+  export {getPatient, getAllPatients, addPatient, deletePatient, updatePatient, getPatientRecord, getAllPatientRecords, addPatientRecord, deletePatientRecord, updatePatientRecord}

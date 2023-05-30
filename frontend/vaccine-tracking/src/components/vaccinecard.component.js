@@ -1,5 +1,6 @@
 import React from "react";
 import ProgressBar from "./progressBar.component.js";
+import { convertDate } from "../utility.js";
 
 const VaccineCard = ({ vaccine }) => {
 
@@ -29,7 +30,7 @@ const VaccineCard = ({ vaccine }) => {
                     {vaccine.name}
                 </div>
                 <div className="content-text">
-                    {vaccine.createdOn}
+                    {convertDate(vaccine.createdAt)}
                 </div>
 
             </div>

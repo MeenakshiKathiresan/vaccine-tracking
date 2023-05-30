@@ -12,6 +12,7 @@ import PatientDetails from './pages/patientDetails.component';
 import Home from './pages/home.component';
 import CreatePatient from './pages/createPatient.component';
 import CreatePatientRecord from './pages/createPatientRecord.component';
+import CreateVaccine from './pages/createVaccine.component';
 
 
 function App() {
@@ -27,7 +28,8 @@ function App() {
           <Route path="/patient/:id" element={<PatientDetails />} />
           <Route path="/vaccine" element={<VaccineDetails />} />
           <Route path="/create/patient" element={<CreatePatient />} />
-          <Route path="/create/patient-record" element={<CreatePatientRecord/>}/>
+          <Route path="/create/patient-record/:id" element={<CreatePatientRecord/>}/>
+          <Route path="/create/vaccine" element={<CreateVaccine/>}/>
         </Routes>
       </Router>
 

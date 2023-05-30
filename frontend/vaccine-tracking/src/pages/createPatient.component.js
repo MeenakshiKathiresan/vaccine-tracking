@@ -12,6 +12,8 @@ const CreatePatient = () => {
     contact: '',
     email:'',
     image:'',
+    medicalHistory:'',
+    allergies: ''
   });
 
   const handleChange = (e) => {
@@ -26,8 +28,9 @@ const CreatePatient = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log(formData); 
+    // formData.allergies = formData.allergies.split(",")
 
-    
+    console.log(formData)
    
 
     addPatient(formData, () => {
@@ -40,6 +43,8 @@ const CreatePatient = () => {
         contact: '',
         email: '',
         image: '',
+        medicalHistory: '',
+        allergies:''
       });
     });
   
@@ -159,6 +164,28 @@ const CreatePatient = () => {
             className="form-control"
             id="image"
             name="image"
+            onChange={handleChange}
+          />
+        </div>
+        <div className="form-group sub-heading-text py-2">
+          <label htmlFor="image">Medical History</label>
+
+          <input
+            type="text"
+            className="form-control"
+            id="medicalHistory"
+            name="medicalHistory"
+            onChange={handleChange}
+          />
+        </div>
+        <div className="form-group sub-heading-text py-2">
+          <label htmlFor="image">Allergies</label>
+
+          <input
+            type="text"
+            className="form-control"
+            id="allergies"
+            name="allergies"
             onChange={handleChange}
           />
         </div>

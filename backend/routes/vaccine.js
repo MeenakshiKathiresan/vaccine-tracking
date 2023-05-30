@@ -2,6 +2,17 @@ const router = require("express").Router();
 const Vaccine = require("../models/vaccine.model");
 const PatientEntry = require("../models/patientEntry.model");
 
+router.route("/").get(async(req, res) =>{
+    try {
+        const vaccines = await Vaccine.find()
+        res.json(vaccines)
+    }
+    catch(err) {
+        res.status(400).json("Error: " + err);
+      }
+
+});
+
 router.route("/add").post(async (req, res) => {
     try {
       const { name, type } = req.body;
