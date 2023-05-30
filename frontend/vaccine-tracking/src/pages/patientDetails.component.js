@@ -1,28 +1,33 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import PatientRecord from "../components/patientRecord.component";
 import Add from "../components/add.component";
+import {getPatient} from "../API services/patientServices"
 
 const PatientDetails = () => {
 
-    const name = "Meenakshi";
-    const age=21;
-    const gender="Female";
-    const imageUrl="https://lh3.googleusercontent.com/ogw/AOLn63FiWYtTp4YAbuzwJKxQkDC2szP_2ZpGCHV8p9TMVA=s32-c-mo";
-    
+    const [patientData, setPatientData] = useState({});
+
+    useEffect(() => {
+        const link = window.location.href;
+        const patientId = link.slice(link.lastIndexOf("/") + 1);
+        getPatient(patientId, setPatientData);
+        
+      }, []);
+
     return (
         <div className="parent-div">
             <br />
             <div>
             <div className="card w-100">
             <div className="d-flex flex-row card-heading">
-                <img src={imageUrl} className="shadow-1-strong me-3 mt-1 card-img" alt="Card" />
+                <img src={patientData.img} className="shadow-1-strong me-3 mt-1 card-img" alt="Card" />
                 <div>
                     <div className="heading-text ">
 
-                    {name}
+                    {patientData.name}
                     </div>
                     <div className="content-text ">
-                        {age}, {gender}
+                        {patientData.age}, {patientData.gender}
                     </div>
                 </div>
             </div>
@@ -46,7 +51,7 @@ const PatientDetails = () => {
 
             </div>
             <PatientRecord />
-            <Add/>
+            <Add navigateTo="/create/patient-record" />
         </div>)
 }
 

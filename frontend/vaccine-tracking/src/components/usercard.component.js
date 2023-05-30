@@ -1,19 +1,19 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 
-const UserCard = ({ name, age, gender, imageUrl }) => {
+const UserCard = ({ patientData}) => {
     return (
-
-
+        <Link to={`/patient/${patientData._id}`}  style={{ textDecoration: 'none', color:'black' }}>
         <div className="card">
             <div className="d-flex flex-row card-heading">
-                <img src={imageUrl} className="shadow-1-strong me-3 mt-1 card-img" alt="Card" />
+                <img src={(patientData.image)} className="shadow-1-strong me-3 mt-1 card-img" alt="Card" />
                 <div>
                     <div className="heading-text ">
 
-                    {name}
+                    {patientData.name}
                     </div>
                     <div className="content-text ">
-                        {age}, {gender}
+                        {patientData.age}, {patientData.gender}
                     </div>
                 </div>
             </div>
@@ -24,15 +24,14 @@ const UserCard = ({ name, age, gender, imageUrl }) => {
             <div className="card-body sub-heading-text ">
 
                 <div>
-                    <p>Vaccine:</p>
-                    <p>Phase:</p>
-                    <p>Blood group: 123 Street</p>
-                    <p>Start date: 25th April, 2022</p>
-                    <p>Contact: 123-456-7890</p>
+                    <p>Blood group: {patientData.bloodGroup}</p>
+                    <p>Start date: {patientData.createdAt}</p>
+                    <p>Contact: {patientData.contact}</p>
+                    <p>Email: {patientData.email}</p>
                 </div>
             </div>
         </div>
-
+        </Link>
 
 
     );

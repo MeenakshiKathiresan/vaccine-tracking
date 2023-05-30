@@ -48,10 +48,13 @@ const VaccineCard = ({ vaccine }) => {
                         <div className="tag" style={{backgroundColor:color}}> Phase {vaccine.phase}</div>
                         </div>
                     </div>
-                    <div className="p-1">{vaccine.count} participants</div>
-                    <div className="p-1">
-
-                        <ProgressBar progress={(vaccine.count / capacity) * 100} />
+                    <div className="py-2">
+                        <div className="d-flex justify-content-between" style={{fontSize:"12px"}}>
+                        <div className="content-text"> {vaccine.count} PARTICIPANTS </div>
+                        <div className="content-text"> {Math.round((vaccine.count / capacity) * 100)} %</div>
+                        </div>
+                        
+                        <ProgressBar progress={Math.round((vaccine.count / capacity) * 100)} />
                     </div>
 
 

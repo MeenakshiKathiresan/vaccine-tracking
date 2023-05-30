@@ -9,6 +9,9 @@ import NavBar from './components/navbar.component';
 import VaccineDetails from './pages/vaccineDetails.component';
 import Vaccines from './pages/vaccines.component';
 import PatientDetails from './pages/patientDetails.component';
+import Home from './pages/home.component';
+import CreatePatient from './pages/createPatient.component';
+import CreatePatientRecord from './pages/createPatientRecord.component';
 
 
 function App() {
@@ -18,10 +21,13 @@ function App() {
       <Router>
         <NavBar />
         <Routes> 
+          <Route path ='/' element={<Home/>}/>
           <Route path="/people" element={<People />} />
           <Route path="/vaccines" element={<Vaccines />} />
-          <Route path="/patient" element={<PatientDetails />} />
+          <Route path="/patient/:id" element={<PatientDetails />} />
           <Route path="/vaccine" element={<VaccineDetails />} />
+          <Route path="/create/patient" element={<CreatePatient />} />
+          <Route path="/create/patient-record" element={<CreatePatientRecord/>}/>
         </Routes>
       </Router>
 

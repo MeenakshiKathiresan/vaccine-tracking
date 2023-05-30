@@ -1,15 +1,26 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Add from '../components/add.component';
 import UserCard from '../components/usercard.component';
+import { getAllPatients } from '../API services/patientServices';
+
 
 const People = () => {
 
+ 
+    
+
     const [activeTab, setActiveTab] = useState('doctors')
+    const [patientsData, setPatientsData] = useState([]);
+
 
     const handleTabClick = (tab) => {
         console.log(tab)
         setActiveTab(tab)
     }
+
+    useEffect(() => {
+        getAllPatients(setPatientsData);
+      }, []);
 
   const numbers = [1, 2, 3, 4, 5];
 
@@ -30,13 +41,13 @@ const People = () => {
             <br/>
             <div className="row">
 
-            {numbers.map((number) => (
+            {patientsData.map((patientData) => (
                 <div className="col-sm-3">
-                    <UserCard name = "Meenakshi" age={21} gender="Female" imageUrl="https://lh3.googleusercontent.com/ogw/AOLn63FiWYtTp4YAbuzwJKxQkDC2szP_2ZpGCHV8p9TMVA=s32-c-mo"/>
+                    <UserCard patientData = {patientData}/>
                 </div>
             ))}
             </div>
-            <Add/>
+            <Add navigateTo = "/create/patient"/>
         </div>
     );
 };

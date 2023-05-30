@@ -28,10 +28,10 @@ const Phase = () => {
                     <h6 className="heading-text parent-div ">Phase 1</h6>
                     <button type="button" className="btn" onClick={handleCollapse}>
                         {!isOpen ? (
-                            <IoMdArrowDropdownCircle size={30}/>
+                            <IoMdArrowDropdownCircle size={30} />
                         ) : (
-                       
-                            <IoMdArrowDropupCircle size={30}/>
+
+                            <IoMdArrowDropupCircle size={30} />
                         )}
                     </button>
                 </div>
@@ -41,18 +41,23 @@ const Phase = () => {
                 {isOpen && (
 
                     <div>
-                
+
                         {numbers.map((number) => {
-                             const curr_color = colors[number % 2];
-                             return (
-                               <PatientEntry
-                                 key={number}
-                                 patientData={dummyPatientData}
-                                 color={curr_color}
-                               />
-                             );
+                            const curr_color = colors[number % 2];
+                            return (
+                                <PatientEntry
+                                    key={number}
+                                    patientData={dummyPatientData}
+                                    color={curr_color}
+                                />
+                            );
                         })}
+
+                        <div className="d-flex justify-content-center p-4">
+                            <button className="btn btn-outline-secondary ">Add people</button>
+                        </div>
                     </div>
+
                 )}
             </div>
 

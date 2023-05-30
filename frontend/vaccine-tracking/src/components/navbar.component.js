@@ -17,7 +17,7 @@ const NavBar = () => {
 
             <nav className="navbar navbar-expand-lg navbar-light bg-light ">
                 <div className="parent-div d-flex justify-content-between p-1 w-100">
-                    <a className={`navbar-brand ${activeTab === 'home' ? 'active' : ''}`} href="#" onClick = {() => handleOnClick('home')}>Moderna Vaccines</a>
+                    <Link className={`navbar-brand ${activeTab === 'home' ? 'active' : ''}`} to="/" onClick = {() => handleOnClick('home')}>Moderna Vaccines</Link>
 
                     <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
                         <span className="navbar-toggler-icon"></span>
