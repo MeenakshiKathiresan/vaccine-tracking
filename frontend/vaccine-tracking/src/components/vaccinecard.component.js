@@ -6,7 +6,7 @@ const VaccineCard = ({ vaccine }) => {
 
     let capacity = 0
     let color = ""
-    switch (vaccine.phase) {
+    switch (1) {
         case 1:
             capacity = 30;
             color = "#edc534"
@@ -46,12 +46,13 @@ const VaccineCard = ({ vaccine }) => {
                         <div className="p-1">{vaccine.type}</div>
                         <div className="p-1">
 
-                        <div className="tag" style={{backgroundColor:color}}> Phase {vaccine.phase}</div>
+                        <div className="tag" style={{backgroundColor:color}}> Phase 1</div>
                         </div>
                     </div>
                     <div className="py-2">
                         <div className="d-flex justify-content-between" style={{fontSize:"12px"}}>
                         <div className="content-text"> {vaccine.count} PARTICIPANTS </div>
+                        {console.log((vaccine.count / capacity) * 100, vaccine.count, capacity)}
                         <div className="content-text"> {Math.round((vaccine.count / capacity) * 100)} %</div>
                         </div>
                         

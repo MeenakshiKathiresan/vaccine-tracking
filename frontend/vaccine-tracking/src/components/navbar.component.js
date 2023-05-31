@@ -33,7 +33,7 @@ const NavBar = () => {
                             </li>
 
                             <li className= "nav-item">
-                                <Link className={`nav-link ${activeTab === 'mindset' ? 'active' : ''}`} to="/" onClick = {() => handleOnClick('mindset')}>Mindset</Link>
+                                <Link className={`nav-link ${activeTab === 'mindset' ? 'active' : ''}`} to="https://www.modernatx.com/about-us/our-mission/modernas-mindsets?messenger=email" target="_blank" onClick = {() => handleOnClick('mindset')}>Mindset</Link>
                             </li>
                         </ul>
                     </div>

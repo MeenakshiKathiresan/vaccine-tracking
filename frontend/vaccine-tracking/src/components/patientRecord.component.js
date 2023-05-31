@@ -38,8 +38,9 @@ const PatientRecord = ({patientRecord}) => {
     return (<div>
         <div className="card phase-box ">
             <div >
+                {console.log(patientRecord)}
                 <div className="p-3 border-bottom d-flex justify-content-between">
-                    <h6 className="heading-text parent-div ">Record {"#12"}</h6>
+                    <h6 className="heading-text parent-div ">Record {patientRecord.recordNumber}</h6>
                     <div className="sub-heading-text">{"25th Dec, 2022"}</div>
                     <div className="tag" style={{ backgroundColor: color }}> {patientRecord.status}</div>
                     <button type="button" className="btn p-0 m-0"  onClick={handleCollapse}>
