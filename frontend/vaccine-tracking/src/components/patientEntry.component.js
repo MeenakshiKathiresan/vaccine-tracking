@@ -3,6 +3,8 @@ import { BiEdit } from "react-icons/bi"
 import { RiDeleteBin6Line } from "react-icons/ri"
 import {FiDownload} from "react-icons/fi"
 
+import { convertDate } from "../utility";
+
 import html2canvas from "html2canvas";
 import jsPDF from "jspdf";
 
@@ -13,6 +15,16 @@ const PatientEntry = ({ patientData, color }) => {
 
 
     const pdfRef = useRef();
+    const colors = ["#32a852", "#f7b51b", "#d92f23"]
+
+    const colorStatus = () =>{
+        switch (patientData.status){
+            case "approved": return colors[0];
+            case "study": return colors[1];
+            case "failed": return colors[2];
+        }
+    }
+
 
 
 const downloadPDF = ()=>{
@@ -35,16 +47,20 @@ const downloadPDF = ()=>{
         <div style={{ backgroundColor: color }} ref={pdfRef}>
             <div className="parent-div justify-content-between d-flex patient-entry-box sub-heading-text">
 
-                <div>
-                    {patientData.name}
-                </div>
+
 
                 <div>
+                <img src={(patientData.patientID.image)} style={{width:"30px"}} className="shadow-1-strong me-3 mt-1 rounded" alt="Card" />
+            
+                    {patientData.patientID.name}
+                </div>
+
+                <div className="tag" style={{backgroundColor:colorStatus()}}>
                     {patientData.status}
                 </div>
 
                 <div>
-                    {patientData.registeredOn}
+                    {convertDate(patientData.createdAt)}
                 </div>
 
                 <div>

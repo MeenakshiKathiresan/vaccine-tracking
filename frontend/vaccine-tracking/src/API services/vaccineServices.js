@@ -15,6 +15,20 @@ const getAllVaccines = (callback) =>{
       });
 }
 
+const getVaccine = (vaccineId, callback) =>{
+    const reqUrl = URLS.baseUrl +"/vaccine/" + vaccineId
+
+    axios.get(reqUrl)
+    .then(response => {
+        if (callback) {
+            callback(response.data);
+          }
+    })
+    .catch(error => {
+        console.log(error);
+      });
+}
+
 
 const addVaccine = (vaccineData, callback) => {
     const reqUrl = URLS.baseUrl + "/vaccine/add";
@@ -33,19 +47,34 @@ const addVaccine = (vaccineData, callback) => {
       });
   }
 
-  const fetchPatients = ( callback) =>{
-    const reqUrl = URLS.baseUrl + "/vaccine/availablePatients";
-  
+ 
+
+  const getAvailablePatients = (callback) =>{
+    const reqUrl = URLS.baseUrl +"/vaccine/available/patients/all"
 
     axios.get(reqUrl)
     .then(response => {
+        if (callback) {
             callback(response.data);
-          
+          }
     })
     .catch(error => {
         console.log(error);
       });
+}
+
+  
+
+  
+
+  const getVaccineRecordsByPhase = (vaccineId, phase, callback) => {
+      const reqUrl = URLS.baseUrl + "/vaccine/entry/"+ vaccineId + "/" +phase;
+      axios.get(reqUrl)
+      .then(response => {callback(response.data)})
+      .catch(error => console.log(error))
+
   }
+
 
   const addPatientEntry = (entryData, callback) =>{
       const reqUrl = URLS.baseUrl + "/vaccine/entry/add"
@@ -63,4 +92,4 @@ const addVaccine = (vaccineData, callback) => {
   }
   
 
-  export {addVaccine, getAllVaccines, fetchPatients, addPatientEntry}
+  export {addVaccine, getAllVaccines, getAvailablePatients, addPatientEntry, getVaccineRecordsByPhase, getVaccine}

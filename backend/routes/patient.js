@@ -2,6 +2,8 @@ const router = require("express").Router();
 const Patient = require("../models/patient.model");
 const PatientRecord = require("../models/patientRecord.model");
 
+
+
 // Read all patients
 router.route("/").get(async (req, res) => {
     try {
@@ -73,7 +75,6 @@ router.route("/records/:patientId").get(async (req, res) => {
         const { patientId } = req.params;
         const records = await PatientRecord.find({ patientID: patientId });
         res.json(records);
-        console.log(records)
 
     } catch (err) {
         res.status(400).json("Error: " + err);
@@ -91,9 +92,6 @@ router.route("/records/add/:patientId").post(async (req, res) => {
         const recordCount = await PatientRecord.countDocuments({ patientID: patientId });
 
         const recordNumber = recordCount ++;
-
-        console.log( status, vitals, medication, observation, recordNumber);
-
         const newRecord = new PatientRecord({
             patientID: patientId,
             status,
@@ -148,6 +146,8 @@ router.route("/records/:recordId/delete").delete(async (req, res) => {
         res.status(400).json("Error: " + err);
     }
 });
+
+
 
 
 

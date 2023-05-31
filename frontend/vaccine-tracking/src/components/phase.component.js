@@ -1,8 +1,9 @@
 import { React, useState } from "react";
 import { IoMdArrowDropdownCircle, IoMdArrowDropupCircle } from "react-icons/io";
 import PatientEntry from "./patientEntry.component";
+import { Link } from "react-router-dom";
 
-const Phase = () => {
+const Phase = ({patientsData, phase}) => {
 
     const [isOpen, setIsOpen] = useState(true);
 
@@ -12,20 +13,12 @@ const Phase = () => {
         setIsOpen((prev) => !prev);
     };
 
-    const dummyPatientData = {
-        name: "John Doe",
-        status: "Active",
-        registeredOn: "2023-05-27",
-    };
-
-
-    const numbers = [1, 2, 3, 4, 5];
 
     return (<div>
         <div className="card phase-box ">
             <div >
                 <div className="p-3 border-bottom d-flex justify-content-between">
-                    <h6 className="heading-text parent-div ">Phase 1</h6>
+                    <h6 className="heading-text parent-div ">Phase {phase}</h6>
                     <button type="button" className="btn" onClick={handleCollapse}>
                         {!isOpen ? (
                             <IoMdArrowDropdownCircle size={30} />
@@ -42,14 +35,16 @@ const Phase = () => {
 
                     <div>
 
-                        {numbers.map((number) => {
-                            const curr_color = colors[number % 2];
+                        {patientsData.map((patientData, index) => {
+                            const curr_color = colors[index % 2];
                             return (
+                                <Link to={`/patient/${patientData.patientID._id}`}  style={{ textDecoration: 'none', color:'black' }}>
                                 <PatientEntry
-                                    key={number}
-                                    patientData={dummyPatientData}
+                                    key={index}
+                                    patientData={patientData}
                                     color={curr_color}
                                 />
+                                </Link>
                             );
                         })}
 

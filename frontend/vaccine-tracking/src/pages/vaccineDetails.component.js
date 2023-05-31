@@ -2,13 +2,14 @@ import React, { useState, useEffect } from "react";
 import Add from "../components/add.component";
 import Phase from "../components/phase.component";
 import ProgressBar from "../components/progressBar.component";
-import { fetchPatients, addPatientEntry } from "../API services/vaccineServices";
+import { getAvailablePatients, addPatientEntry, getVaccineRecordsByPhase, getVaccine } from "../API services/vaccineServices";
+import { convertDate } from "../utility";
 
 
 
 const VaccineDetails = () => {
 
-    const vaccine = {
+    const vaccine1 = {
         "name": "Gardasil",
         "type": "HPV Vaccine",
         "phase": 1,
@@ -19,17 +20,36 @@ const VaccineDetails = () => {
 
 
 
+    const [vaccineId, setVaccineId] = useState('')
+    const [vaccine, setVaccine] = useState('')
     const [selectedPatient, setSelectedPatient] = useState('');
     const [patients, setPatients] = useState([]);
 
+    const [phase1Records, setPhase1Records] = useState([]);
+    const [phase2Records, setPhase2Records] = useState([]);
+    const [phase3Records, setPhase3Records] = useState([]);
+
     useEffect(() => {
 
-        fetchPatients(setPatients);
+        const link = window.location.href;
+        const vaccineId = link.slice(link.lastIndexOf("/") + 1);
+
+        setVaccineId(vaccineId)
+
+        getVaccine(vaccineId, setVaccine);
+
+
+
+        getAvailablePatients(setPatients);
+        getVaccineRecordsByPhase(vaccineId, 1, setPhase1Records);
+        getVaccineRecordsByPhase(vaccineId, 2, setPhase2Records);
+        getVaccineRecordsByPhase(vaccineId, 3, setPhase3Records);
+
     }, []);
 
     let capacity = 0
     let color = ""
-    switch (vaccine.phase) {
+    switch (vaccine1.phase) {
         case 1:
             capacity = 30;
             color = "#edc534"
@@ -77,7 +97,7 @@ const VaccineDetails = () => {
                         {vaccine.name}
                     </div>
                     <div className="content-text">
-                        {vaccine.createdOn}
+                        { convertDate(vaccine.createdAt)}
                     </div>
 
                 </div>
@@ -93,7 +113,7 @@ const VaccineDetails = () => {
                             <div className="p-1">{vaccine.type}</div>
                             <div className="p-1">
 
-                                <div className="tag" style={{ backgroundColor: color }}> Phase {vaccine.phase}</div>
+                                <div className="tag" style={{ backgroundColor: color }}> Phase {vaccine1.phase}</div>
                             </div>
                         </div>
                         <div className="p-1">{vaccine.count} participants</div>
@@ -132,7 +152,9 @@ const VaccineDetails = () => {
             <br />
 
 
-            <Phase />
+            <Phase patientsData={phase1Records} phase={1} />
+            <Phase patientsData={phase2Records} phase={2}/>
+            <Phase patientsData={phase3Records} phase={3} />
         </div>)
 }
 
