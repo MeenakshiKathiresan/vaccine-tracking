@@ -1,6 +1,7 @@
 const router = require("express").Router();
 const Vaccine = require("../models/vaccine.model");
 const PatientEntry = require("../models/patientEntry.model");
+const Patient = require("../models/patient.model");
 
 router.route("/").get(async(req, res) =>{
     try {
@@ -104,6 +105,22 @@ router.route('/entry/edit/:id').put(async (req, res) => {
       res.status(400).json('Error: ' + err);
     }
   });
+
+  router.route('/availablePatients').get(async(req, res) => { 
+      try{
+
+        console.log("calling")
+        const usedPatientIDs = await PatientEntry.distinct('patientID');
+        console.log(usedPatientIDs.length)
+
+        const availablePatients = await Patient.find({ _id: { $nin: usedPatientIDs } });
+        console.log(availablePatients.length, "availabe")
+    
+        res.json(availablePatients);
+      }catch(err) {
+        res.status(400).json('Error: ' + err);
+      }
+  })
   
   // Get all patient entries for a vaccine
   router.route('/entry/:vaccineID').get(async (req, res) => {

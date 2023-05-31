@@ -26,7 +26,7 @@ function App() {
           <Route path="/people" element={<People />} />
           <Route path="/vaccines" element={<Vaccines />} />
           <Route path="/patient/:id" element={<PatientDetails />} />
-          <Route path="/vaccine" element={<VaccineDetails />} />
+          <Route path="/vaccine/:id" element={<VaccineDetails />} />
           <Route path="/create/patient" element={<CreatePatient />} />
           <Route path="/create/patient-record/:id" element={<CreatePatientRecord/>}/>
           <Route path="/create/vaccine" element={<CreateVaccine/>}/>

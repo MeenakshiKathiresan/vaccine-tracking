@@ -9,7 +9,7 @@ const People = () => {
 
 
 
-    const [activeTab, setActiveTab] = useState('doctors')
+    const [activeTab, setActiveTab] = useState('patients')
     const [patientsData, setPatientsData] = useState([]);
 
 

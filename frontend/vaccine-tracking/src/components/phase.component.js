@@ -53,9 +53,7 @@ const Phase = () => {
                             );
                         })}
 
-                        <div className="d-flex justify-content-center p-4">
-                            <button className="btn btn-outline-secondary ">Add people</button>
-                        </div>
+                      
                     </div>
 
                 )}

@@ -1,7 +1,10 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Add from "../components/add.component";
 import Phase from "../components/phase.component";
 import ProgressBar from "../components/progressBar.component";
+import { fetchPatients, addPatientEntry } from "../API services/vaccineServices";
+
+
 
 const VaccineDetails = () => {
 
@@ -12,6 +15,18 @@ const VaccineDetails = () => {
         "count": 10,
         "createdOn": "Dec 2022"
     }
+
+
+
+
+    const [selectedPatient, setSelectedPatient] = useState('');
+    const [patients, setPatients] = useState([]);
+
+    useEffect(() => {
+
+        fetchPatients(setPatients);
+    }, []);
+
     let capacity = 0
     let color = ""
     switch (vaccine.phase) {
@@ -29,9 +44,33 @@ const VaccineDetails = () => {
             break;
     }
 
+    const handleSelectPatient = (e) => {
+        setSelectedPatient(e.target.value);
+    };
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        // Handle form submission
+        // You can use the selectedPatient value for further processing
+
+        const link = window.location.href;
+        const vaccineId = link.slice(link.lastIndexOf("/") + 1);
+
+        const entryData = {
+            phase: "1",
+            vaccineID: vaccineId,
+            patientID: selectedPatient,
+        }
+
+        addPatientEntry(
+            entryData, () => { console.log("added") })
+    };
+
+
     return (
         <div className="parent-div">
             <br />
+
             <div className="card w-100">
                 <div className="d-flex flex-row card-heading  justify-content-between">
                     <div className="heading-text">
@@ -71,8 +110,29 @@ const VaccineDetails = () => {
 
             </div>
 
+            <br /><br />
+
+            <form className="form-inline my-2 my-lg-0 parent-div" onSubmit={handleSubmit}>
+                <div className="input-group">
+                    <select className="form-control mr-sm-2" value={selectedPatient} onChange={handleSelectPatient}>
+                        <option value="">Select Patient</option>
+                        {patients.map((patient) => (
+                            <option key={patient._id} value={patient._id}>
+                                {patient.name}
+                            </option>
+                        ))}
+                    </select>
+                    <div className="input-group-append">
+                        <button className="btn btn-outline-success my-2 my-sm-0" type="submit">
+                            Add
+                        </button>
+                    </div>
+                </div>
+            </form>
+            <br />
+
+
             <Phase />
-            <Add/>
         </div>)
 }
 

@@ -33,6 +33,34 @@ const addVaccine = (vaccineData, callback) => {
       });
   }
 
+  const fetchPatients = ( callback) =>{
+    const reqUrl = URLS.baseUrl + "/vaccine/availablePatients";
   
 
-  export {addVaccine, getAllVaccines}
+    axios.get(reqUrl)
+    .then(response => {
+            callback(response.data);
+          
+    })
+    .catch(error => {
+        console.log(error);
+      });
+  }
+
+  const addPatientEntry = (entryData, callback) =>{
+      const reqUrl = URLS.baseUrl + "/vaccine/entry/add"
+
+      axios.post(reqUrl, entryData)
+      .then(response => {
+        if (callback) {
+            callback(response.data);
+          }
+      })
+      .catch(error =>{
+          console.log(error);
+      })
+
+  }
+  
+
+  export {addVaccine, getAllVaccines, fetchPatients, addPatientEntry}
